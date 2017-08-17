@@ -5,3 +5,4 @@
 * cmder
 * SourceTree
 * TortoiseGit
+* GitFlow for Visual Studio
