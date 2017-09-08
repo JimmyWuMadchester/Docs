@@ -1,4 +1,5 @@
-# The Design of Everyday Things
+# The Design of Everyday Things *Author: Don Norman*
+
 I think it's key to understand the design principles while doing any systems or UX designs. This very old book revised fairly recently is a good starting point for non-designers. As a software developer working on Web technology stacks most of my time, I found this book very intriguing. I am more aware of good and bad designs in daily life as well as working on software products. I believe in better design that reduces our stress level while using systems and products in life and work.
 
 ## Glossary
