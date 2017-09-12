@@ -147,6 +147,8 @@ public class PDFReportGeneraion : IReportGeneration
 ```
 
 ### Liskov substitution principle (LSP)
+Child class should not break parent class's type definition and behavior. Another interesting thing to pay attention to is [mutability](https://stackoverflow.com/a/1030573/5098156) when discussing LSP. 
+
 
 ### Interface segregation principle (ISP)
 
