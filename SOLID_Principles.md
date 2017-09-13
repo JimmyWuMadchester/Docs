@@ -149,6 +149,96 @@ public class PDFReportGeneraion : IReportGeneration
 ### Liskov substitution principle (LSP)
 Child class should not break parent class's type definition and behavior. Another interesting thing to pay attention to is [mutability](https://stackoverflow.com/a/1030573/5098156) when discussing LSP. 
 
+A classic example is Rectangle and Square.
+```C#
+// A base class of Rectangle with **virtual** properties. 
+public class Rectangle 
+{
+    public virtual int Height { get; set; }
+    public virtual int Width { get; set; }
+}
+
+public class Square : Rectangle
+{
+    private int _height;
+    private int _width;
+    public override int Height
+    {
+        get
+        {
+            return _height;
+        }
+        set   // Here is the main problem: Exposing the set method makes the Square class mutable
+        {
+            _height = value;
+            _width = value;
+        }
+    }
+    public override int Width
+    {
+        get
+        {
+            return _width;
+        }
+        set
+        {
+            _width = value;
+            _height = value;
+        }
+    }
+}
+
+public class AreaCalculator
+{
+    public static int CalculateArea(Rectangle r)
+    {
+        return r.Height * r.Width;
+    }
+
+    public static int CalculateArea(Square s)
+    {
+        return s.Height * s.Height;
+    }
+}
+
+[TestMethod]
+public void TwentyFourfor4x6RectanglefromSquare()
+{
+    Rectangle newRectangle = new Square();
+    newRectangle.Height = 4;
+    newRectangle.Width = 6;
+    var result = AreaCalculator.CalculateArea(newRectangle);
+    Assert.AreEqual(24, result);    // Behaviour is broken for the parent Rectangle class.
+}
+```
+
+The fix is shown below using the abstract class ```Shape```
+```C#
+public  abstract class Shape
+{
+    public abstract int Area();
+}
+
+public class Rectangle :Shape
+{
+    public  int Height { get; set; }
+    public  int Width { get; set; }
+    public override int Area()
+    {
+        return Height * Width;
+    }
+}
+
+public class Square : Shape
+{
+    public int Sides { get; set; };
+    public override int Area()
+    {
+        return Sides * Sides;
+    }
+}
+```
+Then with ```Shape```, ```Rectangle``` and ```Square``` are not parent and child relationship anymore. They can only have that relationship when the objects created are immutable. Therefore, a square is a rectangle and always will be.
 
 ### Interface segregation principle (ISP)
 Any client should not be forced to use an interface which is irrelevant to it.
