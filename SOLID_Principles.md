@@ -296,3 +296,102 @@ public class NonPermanentEmployee : IAddOperation
 ```
 
 ### Dependency inversion principle (DIP)
+https://www.exceptionnotfound.net/simply-solid-the-dependency-inversion-principle/
+
+This principle is primarily concerned with reducing dependencies amongst the code modules. 
+The DIP is comprised of two rules:
+* High-level modules should not depend on low-level modules. Both should depend on abstractions.
+* Abstrctions should not depend on details. Details should depend on abstractions.
+
+Another classic/trite example is building a notifications client that is able to send email and SMS text notifications.
+
+Bad example with highly coupled code using comcrete classes.
+```C#
+public class Email
+{
+    public string ToAddress { get; set; }
+    public string Subject { get; set; }
+    public string Content { get; set; }
+    public void SendEmail()
+    {
+        //Send email
+    }
+}
+
+public class SMS
+{
+    public string PhoneNumber { get; set; }
+    public string Message { get; set; }
+    public void SendSMS()
+    {
+        //Send sms
+    }
+}
+
+public class Notification
+{
+    private Email _email;
+    private SMS _sms;
+    public Notification()
+    {
+        _email = new Email();
+        _sms = new SMS();
+    }
+
+    public void Send()
+    {
+        _email.SendEmail();
+        _sms.SendSMS();
+    }
+}
+```
+
+Fix: Introduce an abstration that Notification can rely on and that Email and SMS can implement.
+```C#
+public interface IMessage
+{
+    void SendMessage();
+}
+
+// Email and SMS can implement IMessage
+public class Email : IMessage
+{
+    public string ToAddress { get; set; }
+    public string Subject { get; set; }
+    public string Content { get; set; }
+    public void SendMessage()
+    {
+        //Send email
+    }
+}
+public class SMS : IMessage
+{
+    public string PhoneNumber { get; set; }
+    public string Message { get; set; }
+    public void SendMessage()
+    {
+        //Send sms
+    }
+}
+
+// Make Notification depend on the abstraction IMessage rather than its concrete implementations
+public class Notification
+{
+    private ICollection<IMessage> _messages;
+
+    // Constructor Injection
+    public Notification(ICollection<IMessage> messages)
+    {
+        this._messages = messages;
+    }
+    public void Send()
+    {
+        foreach(var message in _messages)
+        {
+            message.SendMessage();
+        }
+    }
+}
+```
+
+There are 3 types for doing DI, Constructor Injection, Property Injection and Method Injection. It feels to me the Constructor Injection is the most intuitive one which can be achieved via SimpleInjector etc. I haven't got too much experiences in terms of the other two.
