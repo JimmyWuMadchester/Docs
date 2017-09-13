@@ -151,5 +151,58 @@ Child class should not break parent class's type definition and behavior. Anothe
 
 
 ### Interface segregation principle (ISP)
+Any client should not be forced to use an interface which is irrelevant to it.
+
+Bad code example:
+```C#
+public interface IEmployee
+{
+    bool AddEmployeeDetails();  // Applicable to all employee types
+    bool ShowEmployeeDetails(int employeeId);   // Only apply to Permanent Employees
+}
+
+public class PermanentEmployee : IEmployee
+{
+    bool AddEmployeeDetails() {
+        // Implementation goes here.
+    }
+    bool ShowEmployeeDetails(int employeeId) {
+        // Implementation goes here.
+    }
+}
+
+public class NonPermanentEmployee : IEmployee
+{
+    bool AddEmployeeDetails() {
+        // ...
+    }
+    bool ShowEmployeeDetails(int employeeId) {
+        // N/A to this class.
+    }
+}
+```
+With only one interface for both types of employees, the ```NonPermanentEmployee``` class is forced to implement the method of ```ShowEmployeeDetails(int employeeId)```. To correct it, we can split the responsibilities of Add and Show into two interfaces. 
+
+Fix:
+```C#
+public interface IAddOperation
+{
+    bool AddEmployeeDetails();
+}
+public interface IGetOperation
+{
+    bool ShowEmployeeDetails(int employeeId);
+}
+
+public class PermanentEmployee : IAddOperation, IGetOperation
+{
+    // ...
+}
+
+public class NonPermanentEmployee : IAddOperation
+{
+    // ...
+}
+```
 
 ### Dependency inversion principle (DIP)
