@@ -11,6 +11,7 @@ We usually define:
 * Training set — Which you run your learning algorithm on.
 * Dev (development) set — Which you use to tune parameters, select features, and
 make other decisions regarding the learning algorithm. Sometimes also called the holdout
-cross validation set.
+cross validation set. It's also called a validation set, used for model selection.
 * Test set — which you use to evaluate the performance of the algorithm, but not to make
-any decisions about regarding what learning algorithm or parameters to use.
+any decisions about regarding what learning algorithm or parameters to use. 
+The test set is for final model.
