@@ -7,6 +7,11 @@ in the future.
 ## ToDo
 
 1. Research Machine Learning math tricks. [Shakir's blog](http://blog.shakirm.com/2015/11/machine-learning-trick-of-the-day-5-log-derivative-trick/) has some resources to study but I found the content arranged rather difficult to see.
+1. Check out terms: LQR solvers, SLAM system.
+1. Study [Andrej's Python code](https://gist.github.com/karpathy/a4166c7fe253700972fcbc77e4ea32c5).
+1. Study Cross-entropy method, a simple stochastic hill-climbing "guess and check" approach. And try
+[Trust Region Policy Optimization](https://arxiv.org/abs/1502.05477), which almost always works better 
+and more consistently than vanilla PG in practice.
 
 ## Resources
 
@@ -15,6 +20,9 @@ in the future.
 * [REINFORCEjs](https://cs.stanford.edu/people/karpathy/reinforcejs/)
 * [Gym.openai RL benchmarking toolkit](https://gym.openai.com/)
 * [A Beginner’s Guide to Recurrent Networks and LSTMs](https://deeplearning4j.org/lstm.html)
+* [Building Machines That Learn and Think Like People](https://arxiv.org/abs/1604.00289)
+* [Gradient Estimation Using Stochastic Computation Graphs](https://arxiv.org/abs/1506.05254)
+* [Neural Turing Machines](https://arxiv.org/abs/1410.5401)
 
 ## Notes
 
@@ -29,3 +37,6 @@ in the future.
 1. log probability
 1. So reinforcement learning is exactly like supervised learning, but on a continuously changing dataset (the episodes), scaled by the advantage, and we only want to do one (or very few) updates based on each sampled dataset.
 1. Math behind deriving policy gradients. [notations of likelihood function](https://en.wikipedia.org/wiki/Likelihood_function)
+1. Policy Gradients have to actually experience a positive reward, and experience it very often in order to eventually and slowly shift the policy parameters towards repeating moves that give high rewards. With our abstract model, humans can figure out what is likely to give rewards without ever actually experiencing the rewarding or unrewarding transition. I don’t have to actually experience crashing my car into a wall a few hundred times before I slowly start avoiding to do so.
+1. The current consensus is that PG works well only in settings where there are a few discrete choices so that one is not hopelessly sampling through huge search spaces.
+
