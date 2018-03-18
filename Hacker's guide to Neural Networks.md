@@ -50,7 +50,7 @@ when predicting new outcomes. The training samples required is growing
 exponentially when the feature dimension grows. For image recognitions, it 
 would be extremely difficult to have.
 
-### SVM
+### SVM 
 
 loss function: hinge loss
 
@@ -86,3 +86,14 @@ while True:
   weights_grad = evaluate_gradient(loss_fun, data, weights)
   weights += - step_size * weights_grad # perform parameter update
 ```
+
+### Stochastic Gradient Descent (SGD)
+
+### Activation functions
+
+* Sigmoid
+* tanh
+* ReLU
+* Leaky ReLU
+* Maxout
+* ELU
