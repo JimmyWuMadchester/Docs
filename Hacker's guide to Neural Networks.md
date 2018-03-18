@@ -49,3 +49,40 @@ The training dataset has to be densely distributed to represent the space
 when predicting new outcomes. The training samples required is growing 
 exponentially when the feature dimension grows. For image recognitions, it 
 would be extremely difficult to have.
+
+### SVM
+
+loss function: hinge loss
+
+Regularization: used to apply preference of simpler model.
+* L2 regularization: prefers sparse solutions.
+* L1 regularization: trying to spread the influences across multiple inputs.
+* Elastic net (L1 + L2)
+* Max norm regularization
+* Dropout
+* Fancier: batch normalization, stochastic depth
+
+### Softmax Classifier (Multinomial Logistic Regression)
+
+exp -> normalize -> log
+
+### Numerical gradient
+
+Approximate, slow, easy to write
+
+### Analytic gradient
+
+exact, fast, error-prone
+
+In practice: always use analytic gradient, but check implementation with numerical gradient.
+This is called a gradient check.
+
+### Gradient Descent
+
+```{python}
+# Vanilla Gradient Descent
+
+while True:
+  weights_grad = evaluate_gradient(loss_fun, data, weights)
+  weights += - step_size * weights_grad # perform parameter update
+```
