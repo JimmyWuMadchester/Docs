@@ -71,6 +71,13 @@ const sum = numbers.reduce((aggregated, number) =>
   aggregated + number, 0);
 ```
 
+### Map
+
 In JavaScript, we can’t overload the equality operator, and the two objects,
 even though they have the same content, are always considered different. This isn’t
 the case with other languages, such as Java and C#, so be careful!
+
+### Set
+
+Check out the ```...``` operator.
+
