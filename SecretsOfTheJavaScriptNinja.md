@@ -81,3 +81,31 @@ the case with other languages, such as Java and C#, so be careful!
 
 Check out the ```...``` operator.
 
+## Ch.10 Wrangling regular expressions
+
+The literal syntax is preferred when the regex is known at development
+time, and the constructor approach is used when the regex is constructed at
+runtime by building it up dynamically in a string.
+
+One of the reasons that the literal syntax is preferred over expressing regexes in a
+string is that (as you’ll soon see) the backslash character plays an important part in
+regular expressions. But the backslash character is also the escape character for string
+literals, so to express a backslash within a string literal, we need to use a double backslash
+(\\). This can make regular expressions, which already possess a cryptic syntax,
+even more odd-looking when expressed within strings.
+
+In addition to the expression itself, five flags can be associated with a regex:
+
+* i—Makes the regex case-insensitive, so /test/i matches not only test, but also
+Test, TEST, tEsT, and so on.
+* g—Matches all instances of the pattern, as opposed to the default of local, which
+matches only the first occurrence. More on this later.
+* m—Allows matches across multiple lines, as might be obtained from the value of
+a textarea element.
+* y—Enables sticky matching. A regular expression performs sticky matching in
+the target string by attempting to match from the last match position.
+* u—Enables the use of Unicode point escapes (\u{...}).
+
+These flags are appended to the end of the literal (for example, ```/test/ig```) or passed
+in a string as the second parameter to the RegExp constructor (```new RegExp("test",
+"ig")```)
