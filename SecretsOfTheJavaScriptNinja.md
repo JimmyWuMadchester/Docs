@@ -109,3 +109,13 @@ the target string by attempting to match from the last match position.
 These flags are appended to the end of the literal (for example, ```/test/ig```) or passed
 in a string as the second parameter to the RegExp constructor (```new RegExp("test",
 "ig")```)
+
+## Ch.12 Working the DOM
+
+The style object doesn’t reflect any style information inherited from CSS style sheets.
+
+It should be noted that any values in an element’s style property take precedence over
+anything inherited by a style sheet (even if the style sheet rule uses the !important
+annotation).
+
+
