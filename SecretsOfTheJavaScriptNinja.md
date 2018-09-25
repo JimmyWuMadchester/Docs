@@ -118,4 +118,11 @@ It should be noted that any values in an element’s style property take precede
 anything inherited by a style sheet (even if the style sheet rule uses the !important
 annotation).
 
-
+React’s virtual DOM
+> One of the most popular client-side libraries is Facebook’s React (https://
+facebook.github.io/react/). React achieves great performance by using a virtual
+DOM, a set of JavaScript objects that mimic the actual DOM. When we develop
+applications in React, we perform all modifications on the virtual DOM, without any
+regard for layout thrashing. Then, at an appropriate time, React uses the virtual DOM
+to figure out what changes have to be made to the actual DOM, in order to keep the
+UI in sync. This batching of updates increases the performance of applications.
