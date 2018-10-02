@@ -126,3 +126,35 @@ applications in React, we perform all modifications on the virtual DOM, without 
 regard for layout thrashing. Then, at an appropriate time, React uses the virtual DOM
 to figure out what changes have to be made to the actual DOM, in order to keep the
 UI in sync. This batching of updates increases the performance of applications.
+
+## Ch.13 Surviving events
+
+In Netscape’s event model, the event handling starts with the top element and
+trickles down to the event target element. In our case, the event handlers would be
+executed in the following order: document click handler, outerContainer click handler,
+and finally innerContainer click handler. This is called event capturing.
+
+Microsoft chose to go the other way around: start from the targeted element and
+bubble up the DOM tree. In our case, the events would be executed in the following
+order: innerContainer click handler, outerContainer click handler, and document
+click handler. This is called event bubbling.
+
+
+```
+outerContainer.addEventListener("click", function(event){
+  report("innerContainer handler");
+  assert(this === outerContainer,
+    "This refers to the outerContainer");
+  assert(event.target === innerContainer,
+    "event.target refers to the innerContainer");
+});
+```
+Within the outerContainer handler, if we’re handling the event originating on the
+innerContainer, this will refer to the outerContainer and event.target to innerContainer.
+
+This level of decoupling helps to keep code modular, easier to write, and a lot
+easier to debug when something goes wrong. It also makes it easy to share portions
+of code and to move them around without fear of violating a coupled dependency
+between the code fragments. Decoupling is a fundamental advantage when using
+**custom events** in code, and it allows us to develop applications in a much more
+expressive and flexible manner.
