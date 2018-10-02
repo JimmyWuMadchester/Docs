@@ -129,6 +129,13 @@ UI in sync. This batching of updates increases the performance of applications.
 
 ## Ch.13 Surviving events
 
+An event-loop task represents an action performed by the browser. Tasks are
+grouped into two categories:
+* Macrotasks are discrete, self-contained browser actions such as creating the
+main document object, handling various events, and making URL changes.
+* Microtasks are smaller tasks that should be executed as soon as possible.
+Examples include promise callbacks and DOM mutation changes.
+
 In Netscape’s event model, the event handling starts with the top element and
 trickles down to the event target element. In our case, the event handlers would be
 executed in the following order: document click handler, outerContainer click handler,
