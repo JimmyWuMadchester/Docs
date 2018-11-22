@@ -305,7 +305,7 @@ The DIP is comprised of two rules:
 
 Another classic/trite example is building a notifications client that is able to send email and SMS text notifications.
 
-Bad example with highly coupled code using comcrete classes.
+Bad example with highly coupled code using concrete classes.
 ```C#
 public class Email
 {
